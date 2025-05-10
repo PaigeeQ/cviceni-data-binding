@@ -10,14 +10,19 @@ Zadání 2: Na tlačíko přidejte událost `onClick`, která nastaví stav `log
 
 export const Ukol3 = () => {
   const [login, setLogin] = useState('petr');
-
+  const vymazatLogin = () => {
+    setLogin("");
+  }
   return (
     <>
       <label>
         Login:
-        <input type="text" />
+        <input 
+          type="text"
+          value={login}
+          onChange={(e) => setLogin(e.target.value)} />
       </label>
-      <button>Vymazat</button>
+      <button onClick={vymazatLogin}>Vymazat</button>
     </>
   );
 };

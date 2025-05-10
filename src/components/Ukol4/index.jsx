@@ -18,20 +18,54 @@ Zadání 6: Pokud uživatel správně vyplnil obě pole, do stavu `error` nastav
 */
 
 export const Ukol4 = () => {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // Zadání 3
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (login === "") {
+      setError("Chybí login."); // Zadání 4
+      return;
+    }
+
+    if (password === "") {
+      setError("Chybí heslo."); // Zadání 5
+      return;
+    }
+
+    const prihlaseni = {
+      login: login,
+      password: password,
+    };
+
+    console.log(prihlaseni); // Zadání 2
+    setError("Přihlášení proběhlo úspěšně"); // Zadání 6
+  };
+
   return (
     <>
-      <div className="error"></div>
-      <form>
+      <div className="error">{error}</div> {/* Zadání 3 */}
+      <form onSubmit={handleSubmit}> {/* 💥 Tady byla chyba */}
         <div className="field">
           <label>
             Login:
-            <input type="text" />
+            <input 
+              type="text" 
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
+            />
           </label>
         </div>
         <div className="field">
           <label>
             Heslo:
-            <input type="password" />
+            <input 
+              type="password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </label>
         </div>
         <button type="submit">Přihlásit</button>
